@@ -1,6 +1,5 @@
 
 
-
 class HTMLNode():
     def __init__(self, tag=None, value=None, children=None, props=None):
         self.tag = tag
@@ -19,7 +18,6 @@ class HTMLNode():
             return ""
         props = " ".join(f'{k}="{v}"' for k,v in self.props.items())
         return f" {props}"
-
 
 
 class LeafNode(HTMLNode):
@@ -57,3 +55,4 @@ class ParentNode(HTMLNode):
             child_nodes_html += child.to_html()
 
         return f"<{self.tag}{attributes}>{child_nodes_html}</{self.tag}>"
+
