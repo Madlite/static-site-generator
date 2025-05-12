@@ -1,5 +1,5 @@
 import unittest
-from inline_markdown import split_nodes_delimiter
+from inline_markdown import split_nodes_delimiter, extract_markdown_images, extract_markdown_links
 from textnode import TextNode, TextType
 
 
@@ -57,6 +57,31 @@ class TestInlineMarkdown(unittest.TestCase):
             TextNode("italic", TextType.ITALIC)
         ]
         self.assertListEqual(new_nodes, facit)
+
+    # ---------------------------------------------------------------------
+    # Image Tests
+    def test_image_regex(self):
+        text = "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
+        result = extract_markdown_images(text)
+        facit = [
+            ("rick roll", "https://i.imgur.com/aKaOqIh.gif"),
+            ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg")
+        ]
+        self.assertEqual(result, facit)
+
+
+
+    # ---------------------------------------------------------------------
+    # Link Tests
+    def test_link_regex(self):
+        text = "This is text with a link [to boot dev](https://www.boot.dev) and [to youtube](https://www.youtube.com/@bootdotdev)"
+        result = extract_markdown_links(text)
+        facit = [
+            ("to boot dev", "https://www.boot.dev"),
+            ("to youtube", "https://www.youtube.com/@bootdotdev")
+        ]
+        self.assertEqual(result, facit)
+
 
 
 
