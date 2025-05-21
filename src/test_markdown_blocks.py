@@ -1,5 +1,6 @@
 import unittest
-from markdown_blocks import markdown_to_html_node, markdown_to_blocks, block_to_block_type, BlockType, extract_title
+from markdown_blocks import markdown_to_html_node, markdown_to_blocks, block_to_block_type, BlockType
+from generate_page import extract_title, generate_page
 
 class TestBlockMarkdown(unittest.TestCase):
     # ---------------------------------------------------------------------
@@ -60,20 +61,22 @@ This is the same paragraph on a new line
         facit = BlockType.PARAGRAPH
         self.assertEqual(result, facit)
 
-        def test_paragraph(self):
-            md = """
-    This is **bolded** paragraph
-    text in a p
-    tag here
+    # ---------------------------------------------------------------------
+    # Markdown to HTML Tests
+    def test_paragraph(self):
+        md = """
+This is **bolded** paragraph
+text in a p
+tag here
 
-    """
+"""
 
-            node = markdown_to_html_node(md)
-            html = node.to_html()
-            self.assertEqual(
-                html,
-                "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
-            )
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
+        )
 
     def test_paragraphs(self):
         md = """
@@ -158,6 +161,8 @@ the **same** even with inline stuff
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
 
+    # ---------------------------------------------------------------------
+    # Markdown to HTML Tests
     def test_extract_title_one_line(self):
         md = """# Hello"""
 
