@@ -8,9 +8,9 @@ def main():
         basepath = sys.argv[1]
     else:
         basepath = "/"
-    copy_static("docs")
+    copy_static("./docs")
     generate_pages_recursive(basepath)
-    # subprocess.run(["python3", "-m", "http.server", "8888"], cwd="public")
+    subprocess.run(["python3", "-m", "http.server", "8888"], cwd="docs")
     
 if __name__ == "__main__":
     main()
