@@ -13,6 +13,8 @@ def generate_page(from_path, template_path, dest_path):
 
     html = template.replace("{{ Title }}", title)
     html = html.replace("{{ Content }}", html_node)
+    
+    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
     with open(dest_path, "w") as f:
         f.write(html)
