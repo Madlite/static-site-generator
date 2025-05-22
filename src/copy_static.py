@@ -1,7 +1,7 @@
 import os, shutil
 
-def copy_static_to_public(src="./static", dst="./public"):
-    if dst == "./public" and os.path.exists(dst):
+def copy_static(dst, src="./static"):
+    if dst == "./docs" and os.path.exists(dst):
         shutil.rmtree(dst)
     os.mkdir(dst)
 
@@ -11,5 +11,5 @@ def copy_static_to_public(src="./static", dst="./public"):
         if os.path.isfile(src_path):
             shutil.copy(src_path, dst_path)
         else:
-            copy_static_to_public(src_path, dst_path)
+            copy_static(dst_path, src_path)
     
